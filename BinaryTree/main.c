@@ -15,6 +15,8 @@ Node* createNode(int value);
 Tree* createTree();
 void insert(Tree* tree, int value);
 Node* insert2(Node* r, int value);
+void delete(Tree* tree, int value);
+Node* delete2(Node* r, int value);
 void inOrder(Tree* tree);
 void inOrder2(Node* r);
 
@@ -25,6 +27,7 @@ int main(){
     insert(tree, 20);
     insert(tree, 15);
     insert(tree, 40);
+    delete(tree, 40);
     inOrder(tree);
     return 0;
 }
@@ -82,6 +85,53 @@ Node* insert2(Node* r, int value){
     else
     {
         printf("Number %i is already inserted inside the tree.\n", value);
+    }
+    return r;
+}
+
+void delete(Tree* tree, int value){
+    if(tree->root != NULL)
+    {
+        tree->root = delete2(tree->root, value);
+    }
+    else
+    {
+        printf("The tree is empty.\n");
+    }
+}
+
+Node* delete2(Node* r, int value){
+    if(r == NULL)
+    {
+        printf("Value is not inserted inside the tree.\n");
+    }
+    else if(r->value == value)
+    {
+        if(r->left == NULL && r->right == NULL)
+        {
+            free(r);
+            r = NULL;
+        }
+        else if(r->left == NULL)
+        {
+            r = r->right;
+        }
+        else if(r->right == NULL)
+        {
+            r = r->left;
+        }
+        else //if r has left and right
+        {
+            //r = r->right;
+        }
+    }
+    else if(r->value > value) //vai pra esquerda
+    {
+        r->left = delete2(r->left, value);
+    }
+    else //vai pra direita
+    {
+        r->right = delete2(r->right, value);
     }
     return r;
 }
