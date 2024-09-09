@@ -29,7 +29,7 @@ int main(){
     insert(tree, 40);
     insert(tree, 45);
     
-    //delete(tree, 40);
+    delete(tree, 40);
     delete(tree, 10);
 
     inOrder(tree);
