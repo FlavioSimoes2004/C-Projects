@@ -27,7 +27,11 @@ int main(){
     insert(tree, 20);
     insert(tree, 15);
     insert(tree, 40);
-    delete(tree, 40);
+    insert(tree, 45);
+    
+    //delete(tree, 40);
+    delete(tree, 20);
+
     inOrder(tree);
     return 0;
 }
@@ -107,6 +111,7 @@ Node* delete2(Node* r, int value){
     }
     else if(r->value == value)
     {
+        //check if r is root
         if(r->left == NULL && r->right == NULL)
         {
             free(r);
@@ -114,15 +119,32 @@ Node* delete2(Node* r, int value){
         }
         else if(r->left == NULL)
         {
+            Node* old_r = r;
             r = r->right;
+            free(old_r);
         }
         else if(r->right == NULL)
         {
+            Node* old_r = r;
             r = r->left;
+            free(old_r);
         }
         else //if r has left and right
         {
-            //r = r->right;
+            Node* old_r = r;
+
+            r = r->right;
+            if(r -> left != NULL)
+            {
+                Node* l = r->left;
+                while(l->left != NULL)
+                {
+                    l = l->left;
+                }
+                l->left = old_r->left;
+            }
+
+            free(old_r);
         }
     }
     else if(r->value > value) //vai pra esquerda
