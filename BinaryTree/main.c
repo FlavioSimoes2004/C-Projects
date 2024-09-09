@@ -30,7 +30,7 @@ int main(){
     insert(tree, 45);
     
     //delete(tree, 40);
-    delete(tree, 20);
+    delete(tree, 10);
 
     inOrder(tree);
     return 0;
@@ -113,7 +113,20 @@ Node* delete2(Tree* tree, Node* r, int value){
     {
         if(tree->root == r)
         {
-            //
+            Node* old_r = r;
+
+            r = r->right;
+            if(r -> left != NULL)
+            {
+                Node* l = r->left;
+                while(l->left != NULL)
+                {
+                    l = l->left;
+                }
+                l->left = old_r->left;
+            }
+
+            free(old_r);
         }
         else if(r->left == NULL && r->right == NULL)
         {
