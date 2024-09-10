@@ -10,7 +10,8 @@ void increaseArray(Array* array, int newSize);
 void printArray(int* array, int size);
 
 int main(){
-    /*Array arr = {malloc(5 * sizeof(int)), 5};
+    /* Without being a pointer ----------------------------
+    Array arr = {malloc(5 * sizeof(int)), 5};
     for(int i = 0; i < arr.length; i++)
     {
         arr.array[i] = i;
