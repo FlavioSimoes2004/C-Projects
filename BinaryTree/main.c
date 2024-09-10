@@ -28,6 +28,8 @@ int main(){
     insert(tree, 15);
     insert(tree, 40);
     insert(tree, 45);
+
+    inOrder(tree);
     
     delete(tree, 10);
     delete(tree, 40);
@@ -182,6 +184,7 @@ void inOrder(Tree* tree){
     if(tree->root != NULL)
     {
         inOrder2(tree->root);
+        printf("\n");
     }
     else
     {
