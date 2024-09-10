@@ -8,6 +8,7 @@ typedef struct Array{
 
 void increaseArray(Array* array, int newSize);
 void printArray(int* array, int size);
+void freeArray(Array* arr);
 
 int main(){
     /* Without being a pointer ----------------------------
@@ -54,4 +55,12 @@ void printArray(int* array, int size){
         }
     }
     printf(" ---- print finished\n");
+}
+
+void freeArray(Array* arr){
+    if(arr != NULL)
+    {
+        free(arr->array);
+        free(arr);
+    }
 }
