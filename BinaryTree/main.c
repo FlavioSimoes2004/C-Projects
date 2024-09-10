@@ -29,8 +29,12 @@ int main(){
     insert(tree, 40);
     insert(tree, 45);
     
-    delete(tree, 40);
     delete(tree, 10);
+    delete(tree, 40);
+    delete(tree, 45);
+    delete(tree, 9);
+    delete(tree, 20);
+    delete(tree, 15);
 
     inOrder(tree);
     return 0;
@@ -40,7 +44,7 @@ Node* createNode(int value){
     Node* newNode = malloc(sizeof(Node));
 
     if(newNode == NULL){
-        printf("Error malloc NODE");
+        printf("Error malloc NODE.\n");
     }
 
     newNode->value = value;
@@ -54,7 +58,7 @@ Tree* createTree(){
     Tree* newTree = malloc(sizeof(Tree));
 
     if(newTree == NULL){
-        printf("Error malloc TREE");
+        printf("Error malloc TREE.\n");
     }
 
     newTree->root = NULL;
@@ -78,11 +82,11 @@ Node* insert2(Node* r, int value){
     {
         return createNode(value);
     }
-    else if(r->value > value) //vai pra esquerda
+    else if(r->value > value) //goes left
     {
         r->left = insert2(r->left, value);
     }
-    else if(r->value < value) //vai pra direita
+    else if(r->value < value) //goes right
     {
         r->right = insert2(r->right, value);
     }
@@ -111,7 +115,7 @@ Node* delete2(Tree* tree, Node* r, int value){
     }
     else if(r->value == value)
     {
-        if(tree->root == r)
+        /*if(tree->root == r)
         {
             Node* old_r = r;
 
@@ -127,8 +131,8 @@ Node* delete2(Tree* tree, Node* r, int value){
             }
 
             free(old_r);
-        }
-        else if(r->left == NULL && r->right == NULL)
+        }*/
+        if(r->left == NULL && r->right == NULL)
         {
             free(r);
             r = NULL;
@@ -163,11 +167,11 @@ Node* delete2(Tree* tree, Node* r, int value){
             free(old_r);
         }
     }
-    else if(r->value > value) //vai pra esquerda
+    else if(r->value > value) //goes left
     {
         r->left = delete2(tree, r->left, value);
     }
-    else //vai pra direita
+    else //goes right
     {
         r->right = delete2(tree, r->right, value);
     }
@@ -175,7 +179,14 @@ Node* delete2(Tree* tree, Node* r, int value){
 }
 
 void inOrder(Tree* tree){
-    inOrder2(tree->root);
+    if(tree->root != NULL)
+    {
+        inOrder2(tree->root);
+    }
+    else
+    {
+        printf("InOrder is not possible because the tree is empty.\n");
+    }
 }
 
 void inOrder2(Node* r){
