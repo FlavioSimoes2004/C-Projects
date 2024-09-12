@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+//RSP - ROCK, SCISSORS, PAPER
 int main(){
     srand(time(NULL));
 
@@ -64,4 +65,5 @@ int main(){
     } while (userChoice != 0);
 
     printf("Game ended.");
+    return 0;
 }
