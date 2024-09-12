@@ -8,7 +8,7 @@ int main(){
     int userChoice, randChoice;
     do
     {
-        printf("0 - Ends the game\n1 - Rock | 2 - Scissors | 3 - Paper\nYour choice: ");
+        printf("0 - Game ends\n1 - Rock | 2 - Scissors | 3 - Paper\nYour choice: ");
         scanf(" %i", &userChoice);
         if(userChoice < 0 || userChoice > 3)
         {
@@ -21,7 +21,7 @@ int main(){
         {
             randChoice = (rand() % 3) + 1;
             printf("Rand = %i\n", randChoice);
-            
+
             if(userChoice == randChoice)
             {
                 printf("Tie.");
