@@ -16,11 +16,12 @@ int main(){
             scanf(" %i", &userChoice);
         }
 
-        randChoice = (rand() % 3) + 1;
-        printf("Rand = %i\n", randChoice);
 
         if(userChoice != 0)
         {
+            randChoice = (rand() % 3) + 1;
+            printf("Rand = %i\n", randChoice);
+            
             if(userChoice == randChoice)
             {
                 printf("Tie.");
