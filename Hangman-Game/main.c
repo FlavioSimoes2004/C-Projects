@@ -105,10 +105,10 @@ int main(){
         if(choice == 1)
         {
             chosenWord = rand() % sizeof(words)/sizeof(char*);
-            printf("Word chosen = %s\n", words[chosenWord]);
+            //printf("Word chosen = %s\n", words[chosenWord]);
 
             num_letters = getNumLetters(words[chosenWord]);
-            printf("Num letters = %i\n", num_letters);
+            //printf("Num letters = %i\n", num_letters);
 
             int length = tries + num_letters + 1;
             char tried_letters[length];
