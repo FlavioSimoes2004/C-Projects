@@ -45,6 +45,31 @@ int getNumLetters(const char* word){
     return num_letters;
 }
 
+void getWord(char* word, char* tried_letters){
+    char secretWord[strlen(word) + 1];
+    for(int i = 0; i < strlen(word); i++)
+    {
+        secretWord[i] = '_';
+    }
+    secretWord[strlen(word)] = '\0';
+    int pos = 0;
+
+    for(int i = 0; i < strlen(word); i++)
+    {
+        for(int j = 0; j < strlen(tried_letters); j++)
+        {
+            if(word[i] == tried_letters[j])
+            {
+                secretWord[pos] = word[i];
+                break;
+            }
+        }
+        pos = pos + 1;
+    }
+
+    printf("Word progress: %s\n", secretWord);
+}
+
 int main(){
     srand(time(NULL));
 
@@ -85,8 +110,13 @@ int main(){
             num_letters = getNumLetters(words[chosenWord]);
             printf("Num letters = %i\n", num_letters);
 
-            char letters_found[strlen(words[chosenWord])+1];
-            letters_found[strlen(words[chosenWord])] = '\0';
+            int length = tries + num_letters + 1;
+            char tried_letters[length];
+            for(int i = 0; i < length; i++)
+            {
+                tried_letters[i] = '_';
+            }
+            tried_letters[length - 1] = '\0';
 
             while(1)
             {
@@ -94,24 +124,35 @@ int main(){
                 printf("Choose a letter: ");
                 scanf(" %c", &userChoice);
 
-                if(repeatedLetter(words[chosenWord], userChoice) == 0)
+                if(repeatedLetter(tried_letters, userChoice) == 1) //the letter was already used
                 {
+                    printf("You already tried this letter.\n");
+                }
+                else if(repeatedLetter(words[chosenWord], userChoice) == 0) //the word does not contain the letter
+                {
+                    tried_letters[length - (current_tries + num_letters + 1)] = userChoice;
                     current_tries = current_tries - 1;
                 }
-                else
+                else //the word contain this letter
                 {
+                    tried_letters[length - (current_tries + num_letters + 1)] = userChoice;
                     num_letters = num_letters - 1;
                 }
 
                 if(num_letters == 0)
                 {
-                    printf("You found the word.\n");
+                    printf("You found the word. The word was: %s.\n", words[chosenWord]);
                     break;
                 }
                 else if(current_tries == 0)
                 {
                     printf("You lost. The word was: %s.\n", words[chosenWord]);
                     break;
+                }
+                else
+                {
+                    printf("Letters used: %s\n", tried_letters);
+                    getWord(words[chosenWord], tried_letters);
                 }
             }
             current_tries = tries;
